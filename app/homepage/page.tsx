@@ -19,7 +19,7 @@ export default async function HomePage(): Promise<JSX.Element> {
       <section className="flex flex-col items-center justify-center text-center mt-24 px-4">
         <h2 className="text-4xl font-bold mb-4 text-pink-700">Welcome to Pairly</h2>
         <p className="text-lg max-w-xl text-gray-600">
-          Connect with real people. Find love, friendship, and everything in between — beautifully.
+          Connect with real people. 
         </p>
       </section>
     </main>
