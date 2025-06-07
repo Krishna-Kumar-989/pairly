@@ -82,7 +82,7 @@ export default async function PotentialMatchPage(): Promise<JSX.Element> {
     const result = await supabase
       .from('user_profiles')
       .select('user_id, full_name, profile_pic, bio, age, gender')
-      .neq('id', user.id)
+      .neq('user_id', user.id)
       .limit(10);
 
     profiles = result.data as UserProfile[] | null;
