@@ -31,6 +31,15 @@ export default function InteractionForm({ senderId, receiverId }: Props): JSX.El
       },
     ]);
 
+
+    
+   await supabase.rpc('increment_pending_request_count', { uid: receiverId })
+
+
+
+
+
+
     setLoading(false);
 
     if (!error) {

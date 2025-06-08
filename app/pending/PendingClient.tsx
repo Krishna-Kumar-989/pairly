@@ -31,16 +31,23 @@ export default function PendingClient({profiles, interactions }: Props): JSX.Ele
   const updateStatus = async (id: string, status: 'accepted' | 'rejected'): Promise<void> => {
     setLoadingId(id);
 
-    const { error } = await supabase
-      .from('interactions')
-      .update({ status })
-      .eq('id', id);
+   const { data, error } = await supabase
+  .from('interactions')
+  .update({ status })
+  .eq('id', id)
+  .select('receiver_id')
+  .single();
 
-    if (error) {
-      console.error(`Failed to update interaction ${id}:`, error);
-    } else {
-      setPending((prev) => prev.filter((i) => i.id !== id));
-    }
+if (error) {
+  console.error(`Failed to update interaction ${id}:`, error);
+} else {
+  const receiver_id = data.receiver_id;
+  await supabase.rpc('decrement_pending_request_count', { uid: data.receiver_id });
+  setPending((prev) => prev.filter((i) => i.id !== id));
+}
+
+
+
 
     setLoadingId(null);
   };

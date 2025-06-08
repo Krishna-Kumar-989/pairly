@@ -1,7 +1,7 @@
 import Navbar from '../instruments/navbar'
 import EditProfileButton from './EditProfileButton'
 import { createClient } from '@/app/utils/supabase/server'
-import type { JSX } from 'react';
+import type { JSX } from 'react'
 
 interface UserProfile {
   user_id: string
@@ -14,9 +14,18 @@ interface UserProfile {
 }
 
 interface UserLocation {
-  user_id: string
   city?: string | null
   country?: string | null
+}
+
+interface MorePics {
+  user_id: string
+  image_1_url?: string | null
+  image_2_url?: string | null
+  image_3_url?: string | null
+  image_4_url?: string | null
+  image_5_url?: string | null
+  image_6_url?: string | null
 }
 
 export default async function ViewProfilePage(): Promise<JSX.Element> {
@@ -33,6 +42,7 @@ export default async function ViewProfilePage(): Promise<JSX.Element> {
     )
   }
 
+  // Fetch user profile
   const { data: profile, error: profileError } = await supabase
     //.from<UserProfile>('user_profiles')
     .from('user_profiles')
@@ -48,15 +58,30 @@ export default async function ViewProfilePage(): Promise<JSX.Element> {
     )
   }
 
+  // Fetch user location
   const { data: locationData, error: locationError } = await supabase
     //.from<UserLocation>('user_location')
     .from('user_location')
     .select('city, country')
-    .eq('id', user.id) // adjust here if your schema differs
+    .eq('user_id', user.id)
     .single()
 
   if (locationError) {
     console.warn('Failed to fetch location:', locationError.message)
+  }
+
+  // Fetch additional pictures
+  const { data: picsData, error: picsError } = await supabase
+   // .from<MorePics>('morepics')
+   .from('morepics')
+    .select(
+      'user_id, image_1_url, image_2_url, image_3_url, image_4_url, image_5_url, image_6_url'
+    )
+    .eq('user_id', user.id)
+    .single()
+
+  if (picsError) {
+    console.warn('Failed to fetch additional pics:', picsError.message)
   }
 
   const locationString =
@@ -111,6 +136,43 @@ export default async function ViewProfilePage(): Promise<JSX.Element> {
               {profile.bio ?? 'No bio available.'}
             </p>
           </section>
+
+         {/* More Pics Section */}
+{picsData && (
+  <section className="p-10 bg-white rounded-b-3xl shadow-inner mt-6">
+    <h2 className="text-3xl font-bold text-rose-600 mb-4 border-b border-rose-200 pb-2">
+      More Photos
+    </h2>
+    <div className="grid grid-cols-3 gap-6">
+      {[
+        picsData.image_1_url,
+        picsData.image_2_url,
+        picsData.image_3_url,
+        picsData.image_4_url,
+        picsData.image_5_url,
+        picsData.image_6_url,
+      ].map((url, idx) =>
+        url ? (
+          <img
+            key={idx}
+            src={url}
+            alt={`Additional pic ${idx + 1}`}
+            className="w-full h-48 object-cover rounded-lg shadow-md"
+            loading="lazy"
+          />
+        ) : (
+          <div
+            key={idx}
+            className="w-full h-48 bg-gray-100 rounded-lg flex items-center justify-center text-gray-300 select-none"
+          >
+            No Image
+          </div>
+        )
+      )}
+    </div>
+  </section>
+)}
+
         </div>
       </div>
     </main>

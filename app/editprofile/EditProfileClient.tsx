@@ -5,7 +5,7 @@ import UploadProfileImage from './UploadProfileImage';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import Navbar from '../instruments/navbar';
-import { supabase } from '../lib/supabase'; // make sure path is correct
+import { supabase } from '../lib/supabase'; // Ensure this path is correct
 import type { JSX } from 'react';
 
 interface Profile {
@@ -52,9 +52,13 @@ export default function EditProfileClient({ userId, profile }: Props): JSX.Eleme
     router.push('/selectlocation');
   }
 
+  function handleEditAdditionalPictures(): void {
+    router.push('/addmorepics');
+  }
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-100 to-violet-100 flex flex-col items-center py-12 px-6">
-      <Navbar />
+      
       <div className="max-w-3xl w-full bg-pink-50 rounded-3xl shadow-2xl overflow-hidden relative p-10 flex flex-col gap-8">
         {/* Back Button */}
         <button
@@ -115,6 +119,15 @@ export default function EditProfileClient({ userId, profile }: Props): JSX.Eleme
             className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-3xl font-semibold shadow-md transition w-full max-w-xs"
           >
             Change Location
+          </button>
+
+          {/* Edit Additional Pictures Button */}
+          <button
+            onClick={handleEditAdditionalPictures}
+            type="button"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-3xl font-semibold shadow-md transition w-full max-w-xs"
+          >
+            Edit Additional Pictures
           </button>
         </div>
       </div>

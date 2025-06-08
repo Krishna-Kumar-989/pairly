@@ -4,6 +4,7 @@ import { createClient } from '@/app/utils/supabase/server';
 //import { Database } from '@/app/utils/supabase/types/supabase';
 import { User as SupabaseUser } from '@supabase/supabase-js';
 import type { JSX } from 'react';
+import Navbar from '../instruments/navbar';
 
 // Create a custom User type that matches what your Sender component expects
 type User = Omit<SupabaseUser, 'email'> & {
@@ -54,5 +55,13 @@ export default async function Page(): Promise<JSX.Element> {
     email: supabaseUser.email ?? null
   };
 
-  return <Sender user={user} profiles={profiles ?? []} />;
+  return (
+    <div>
+            <Navbar />
+  <Sender user={user} profiles={profiles ?? []} />
+  
+  
+    </div>
+  
+  );
 }
