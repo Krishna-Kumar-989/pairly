@@ -2,12 +2,27 @@
 import { createClient } from '@/app/utils/supabase/server';
 import Navbar from '../instruments/navbar';
 import type { JSX } from 'react';
+import { User } from '@supabase/supabase-js';
+import SetCookiePage from './setcookiepage';
 
 export default async function HomePage(): Promise<JSX.Element> {
+
+ //get user 
   const supabase = await createClient();
 
-  // Call auth but don't destructure `user` since it's unused
-  await supabase.auth.getUser();
+ 
+   const {
+     data: { user },
+   }: { data: { user: User | null } } = await supabase.auth.getUser();
+
+    if(!user)
+    {
+      console.log("No user found");
+
+    }else{
+      console.log(user.id);
+    }
+ 
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-pink-100 to-white text-gray-800">
@@ -21,6 +36,10 @@ export default async function HomePage(): Promise<JSX.Element> {
         <p className="text-lg max-w-xl text-gray-600">
           Connect with real people. 
         </p>
+       
+         <SetCookiePage userID={user?.id} />
+
+          
       </section>
     </main>
   );
