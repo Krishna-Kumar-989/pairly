@@ -40,7 +40,7 @@ export default async function PotentialMatchPage(): Promise<JSX.Element> {
     );
   }
 
-  const noPreviousMatch = false;
+  const noPreviousMatch = true;
 
   let profiles: UserProfile[] | null = null;
   let profilesError: Error | null = null;
