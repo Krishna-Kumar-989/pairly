@@ -122,14 +122,14 @@ export default async function PotentialMatchPage(): Promise<JSX.Element> {
     .eq('id', randomProfile.user_id)
     .single();
 
-  if (locationError) {
-    return (
-      <>
-        {navbar}
-        <div className="p-4 text-center">Error loading location data.</div>
-      </>
-    );
-  }
+  // if (locationError) {
+  //   return (
+  //     <>
+  //       {navbar}
+  //       <div className="p-4 text-center">Error loading location data.</div>
+  //     </>
+  //   );
+  // }
 
   const profileWithLocation: UserProfile = {
     ...randomProfile,
