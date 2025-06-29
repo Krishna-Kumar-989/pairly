@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase'; // Adjust import path to your supabase client
+import { supabase } from '../lib/supabase';
 
 interface Preferences {
   preferred_age_min?: number | null;

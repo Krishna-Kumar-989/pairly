@@ -11,7 +11,7 @@ export default async function PreferencesPage(): Promise<JSX.Element> {
   const {
     data: { user },
     error: userError,
-  } = await supabase.auth.getUser(); // Returns AuthError, not PostgrestError
+  } = await supabase.auth.getUser(); 
 
   if (userError || !user) {
     return (

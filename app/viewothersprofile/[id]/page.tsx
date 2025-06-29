@@ -57,7 +57,7 @@ export default async function ViewOthersProfilePage({
    // .from<UserLocation>('user_location')
     .from('user_location')
     .select('city, country')
-    .eq('user_id', userId) // fix here if needed
+    .eq('user_id', userId) 
     .single()
 
   if (locationError) {

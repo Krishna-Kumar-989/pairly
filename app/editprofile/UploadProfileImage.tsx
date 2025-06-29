@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/app/lib/supabase'; // adjust path as needed
+import { supabase } from '@/app/lib/supabase'; 
 
 interface Props {
   profilePic: string;

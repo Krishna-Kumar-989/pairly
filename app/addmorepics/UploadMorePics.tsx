@@ -19,7 +19,7 @@ export default function UploadMorePics({ user }: UserDataFormProps) {
   const [success, setSuccess] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  // Fetch existing image URLs on mount
+ 
   useEffect(() => {
     if (!user) return
 
@@ -45,7 +45,7 @@ export default function UploadMorePics({ user }: UserDataFormProps) {
       }
 
       if (data) {
-        // Map existing URLs into previews
+      
         setPreviews([
           data.image_1_url || null,
           data.image_2_url || null,
@@ -99,7 +99,7 @@ export default function UploadMorePics({ user }: UserDataFormProps) {
 
       for (let i = 0; i < 6; i++) {
         if (images[i]) {
-          // Upload new images only if a new file is selected
+          
           const { data, error: uploadError } = await supabase.storage
             .from('profile-images')
             .upload(`public/${user.id}/more/${Date.now()}_${images[i]?.name}`, images[i]!, {
@@ -113,7 +113,7 @@ export default function UploadMorePics({ user }: UserDataFormProps) {
           const url = `https://axtqruryirfftmfmvxmr.supabase.co/storage/v1/object/public/profile-images/${data?.path}`
           urls.push(url)
         } else {
-          // Keep existing preview URL if no new file selected
+         
           urls.push(previews[i] ?? '')
         }
       }

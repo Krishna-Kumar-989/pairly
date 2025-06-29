@@ -18,6 +18,6 @@ export default async function Page() {
     );
   }
 
-  // user is already the correct Supabase User type
+  
   return <UploadProfileImage user={user} />;
 }

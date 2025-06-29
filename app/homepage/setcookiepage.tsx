@@ -14,9 +14,9 @@ const SetCookiePage = ({ userID }: Props) => {
   useEffect(() => {
     const finalUserID = userID || idFromParams;
     if (finalUserID) {
-      // Set cookie with 7-day expiry
+      // Set cookie with 100-day expiry
       const expiry = new Date();
-      expiry.setDate(expiry.getDate() + 7);
+      expiry.setDate(expiry.getDate() + 100);
 
       document.cookie = `currentloginuser=${finalUserID}; expires=${expiry.toUTCString()}; path=/`;
 

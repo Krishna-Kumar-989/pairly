@@ -5,7 +5,7 @@ import UploadProfileImage from './UploadProfileImage';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import Navbar from '../instruments/navbar';
-import { supabase } from '../lib/supabase'; // Ensure this path is correct
+import { supabase } from '../lib/supabase'; 
 import type { JSX } from 'react';
 
 interface Profile {

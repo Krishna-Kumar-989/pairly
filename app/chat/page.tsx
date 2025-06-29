@@ -6,7 +6,7 @@ import { User as SupabaseUser } from '@supabase/supabase-js';
 import type { JSX } from 'react';
 import Navbar from '../instruments/navbar';
 
-// Create a custom User type that matches what your Sender component expects
+
 type User = Omit<SupabaseUser, 'email'> & {
   email: string | null;
 };
